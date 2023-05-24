@@ -8,15 +8,17 @@ import {
   MdPeople,
   MdPhone,
 } from "react-icons/md";
+import { HiOutlineMenuAlt2 } from "react-icons/hi";
 import { SlBriefcase } from "react-icons/sl";
 import "./App.css";
 import logo from "./assets/logo.png";
 import woman from "./assets/woman.png";
+import { motion } from "framer-motion";
 
 export default function App() {
   return (
     <div className="bg-[#fefefe] text-slate-700">
-      <header className="block md:flex max-w-6xl m-auto p-3">
+      <header className="flex max-w-6xl m-auto p-3 items-center justify-between">
         <img src={logo} alt="" />
         <nav className="hidden lg:flex flex-1 justify-center items-center text-sky-950">
           <a className="mx-2 text-orange-400">Home</a>
@@ -25,13 +27,18 @@ export default function App() {
           <a className="mx-2">Lawyers</a>
           <a className="mx-2">Reviews</a>
         </nav>
-        <div className="flex items-center">
+        <nav className="block lg:hidden">
+          <HiOutlineMenuAlt2 size={40} cursor="pointer" />
+        </nav>
+        <div className="hidden lg:flex items-center">
           <button className="flex p-2 rounded-full border-solid border-2 border-orange-400 text-orange-400 mx-2">
             +1-202-555-0109
           </button>
           <button className="bg-orange-400 p-2 rounded-full text-white font-bold flex items-center">
             <span className="inline-block mr-2">Contact Us</span>
-            <span className="inline-block bg-white/30 rounded-full p-2"><MdPhone /></span>
+            <span className="inline-block bg-white/30 rounded-full p-2">
+              <MdPhone />
+            </span>
           </button>
         </div>
       </header>
@@ -40,16 +47,29 @@ export default function App() {
           <div className="flex flex-col self-center">
             <div className="p-5">
               <h1 className="font-bold text-5xl font-serif text-sky-950">
-                We Are Experts In The Legal Profession
+                <motion.span initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+                  We Are Experts In
+                </motion.span>
+                <br />
+                <motion.span
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1, transition: { delay: 0.2 } }}
+                >
+                  The Legal Profession
+                </motion.span>
               </h1>
               <p className="mt-4">
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Necessitatibus, accusamus! Recusandae corrupti non ut
                 perspiciatis accusamus dignissimos.
               </p>
-              <button className="bg-orange-400 p-4 rounded-full text-white mt-4 font-bold">
+              <motion.button
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0, transition: { delay: 0.2 } }}
+                className="bg-orange-400 p-4 rounded-full text-white mt-4 font-bold"
+              >
                 Contact Us
-              </button>
+              </motion.button>
             </div>
           </div>
           <div>
@@ -61,13 +81,33 @@ export default function App() {
                   alt="woman image"
                 />
               </div>
-              <div className="hidden lg:flex absolute h-14 w-14 bg-white shadow-md rounded-full justify-center items-center bottom-40 left-[-2rem]">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ scale: [1, 1.1, 1], opacity: 30 }}
+                className="hidden lg:flex absolute h-14 w-14 bg-white shadow-md rounded-full justify-center items-center bottom-40 left-[-2rem]"
+              >
                 <MdGavel size={30} fill="rgb(251 146 60)" />
-              </div>
-              <div className="hidden lg:flex absolute h-14 w-14 bg-white shadow-md rounded-full justify-center items-center top-20 right-0">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: 30,
+                  transition: { delay: 0.2 },
+                }}
+                className="hidden lg:flex absolute h-14 w-14 bg-white shadow-md rounded-full justify-center items-center top-20 right-0"
+              >
                 <GiScales size={30} fill="rgb(251 146 60)" />
-              </div>
-              <div className="hidden lg:block shadow-md rounded-md max-w-full w-50 p-2 absolute bottom-[-3rem] right-[-5rem] bg-white z-20">
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: 30,
+                  transition: { delay: 0.4 },
+                }}
+                className="hidden lg:block shadow-md rounded-md max-w-full w-50 p-2 absolute bottom-[-3rem] right-[-5rem] bg-white z-20"
+              >
                 <div className="p-2 rounded-lg bg-blue-400 text-white mb-2 flex">
                   <div className="bg-white/30 rounded-md mr-2 flex items-center">
                     <IoMdTrophy size={50} />
@@ -96,7 +136,7 @@ export default function App() {
                     <br /> <span>Business Partners</span>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             </div>
           </div>
         </section>
@@ -202,9 +242,9 @@ export default function App() {
         {/* <section className="max-w-5xl m-auto grid grid-cols-1 gap-2 md:grid-cols-2 mt-12">
           <h1>Why Choose Us?</h1>
         </section> */}
-        <footer className="mt-12 mb-12">
+        <footer className="mb-12">
           <div className="max-w-5xl m-auto block text-center md:text-left md:flex justify-between">
-            <div className="w-full max-w-xs">
+            <div className="w-full max-w-xs m-auto md:m-0">
               <img src={logo} />
               <p className="mt-2 leading-relaxed tracking-wide">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure
@@ -251,7 +291,9 @@ export default function App() {
             </div>
           </div>
           <div className="max-w-7xl h-[2px] w-full bg-slate-200 m-auto mt-12 mb-12"></div>
-          <div className="text-center">© 2021 Instant Law. All rights reserved.</div>
+          <div className="text-center">
+            © 2021 Instant Law. All rights reserved.
+          </div>
         </footer>
       </main>
     </div>
